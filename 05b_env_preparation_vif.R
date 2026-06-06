@@ -1,8 +1,8 @@
 # ==============================================================
-# Script 08b: Environmental Variable Preparation (VIF)
+# Script 05b: Environmental Variable Preparation (VIF)
 # Project: rumex-landscape-phylogenomics
 #
-# Prepares environmental rasters for ensemble SDM (Script 08c):
+# Prepares environmental rasters for ensemble SDM (Script 05c):
 #   1. Crops/masks each climate scenario to the study area
 #      (alpha-hull polygon from Script 08a)
 #   2. Runs Variance Inflation Factor (VIF) selection on the
