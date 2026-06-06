@@ -1,0 +1,54 @@
+cff-version: 1.2.0
+title: >-
+  Historical Landscapes and Climate Dynamics shape Phylogeography
+  of Rumex hastatus in the Himalaya-Hengduan Mountains
+message: >-
+  If you use this code or data, please cite the associated manuscript.
+type: software
+authors:
+  - family-names: Jnawali
+    given-names: Bikram
+    orcid: "https://orcid.org/0009-0008-9940-4860"
+    affiliation: >-
+      Kunming Institute of Botany, Chinese Academy of Sciences,
+      Kunming, China
+  - family-names: Sun
+    given-names: Hang
+    affiliation: >-
+      Kunming Institute of Botany, Chinese Academy of Sciences,
+      Kunming, China
+  - family-names: Luo
+    given-names: Dong
+    affiliation: >-
+      Kunming Institute of Botany, Chinese Academy of Sciences,
+      Kunming, China
+date-released: "2026"
+license: MIT
+repository-code: "https://github.com/bikgya/Rumex_phylogeography_HHM"
+keywords:
+  - phylogeography
+  - Rumex hastatus
+  - Himalaya
+  - Hengduan Mountains
+  - population genomics
+  - landscape genetics
+  - species distribution modelling
+  - genotype-environment association
+  - ANGSD
+  - ecospat
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Jnawali
+      given-names: Bikram
+      orcid: "https://orcid.org/0009-0008-9940-4860"
+    - family-names: Sun
+      given-names: Hang
+    - family-names: Luo
+      given-names: Dong
+  title: >-
+    Historical Landscapes and Climate Dynamics shape Phylogeography
+    of Rumex hastatus in the Himalaya-Hengduan Mountains
+  journal: Plant Diversity
+  year: 2026
+  notes: in press

@@ -1,0 +1,77 @@
+# =============================================
+# Rumex_phylogeography_HHM .gitignore
+# =============================================
+
+# --- Generated outputs (recreated by scripts) ---
+results/
+figures/
+output/
+
+# --- Large genomic data ---
+*.bam
+*.bam.bai
+*.sam
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.vcf
+*.vcf.gz
+*.bcf
+*.sra
+*.beagle.gz
+*.mafs.gz
+*.saf.idx
+*.saf.pos.gz
+*.saf.gz
+*.glf.gz
+*.geno.gz
+*.counts.gz
+*.depthSample
+*.depthGlobal
+*.arg
+
+# --- Large spatial/raster files ---
+*.tif
+*.tiff
+*.img
+*.hdf
+*.nc
+*.grd
+*.gri
+*.asc
+
+# --- R temp files ---
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+.Renviron
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# --- Conda / virtual envs ---
+.conda/
+env/
+venv/
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- SLURM/HPC logs ---
+slurm-*.out
+*.e[0-9]*
+*.o[0-9]*
+
+# --- Editor files ---
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
