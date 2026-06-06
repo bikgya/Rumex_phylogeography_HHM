@@ -1,8 +1,8 @@
 # ==============================================================
-# Script 08a: Occurrence Cleaning, Spatial Thinning, and Alpha Hull
+# Script 05a: Occurrence Cleaning, Spatial Thinning, and Alpha Hull
 # Project: rumex-landscape-phylogenomics
 #
-# Prepares occurrence data for ensemble SDM (Script 08c):
+# Prepares occurrence data for ensemble SDM (Script 05c):
 #   1. Reads cleaned occurrence records
 #   2. Spatially thins records to a minimum inter-point distance
 #      (default 10 km) to reduce sampling bias
