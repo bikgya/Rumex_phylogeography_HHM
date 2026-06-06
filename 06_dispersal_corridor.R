@@ -1,10 +1,10 @@
 # ==============================================================
-# Script 09: Dispersal Corridor Analysis (Waypoint-Guided LCP)
+# Script 06: Dispersal Corridor Analysis (Waypoint-Guided LCP)
 # Project: rumex-landscape-phylogenomics
 #
 # Tests for a Late Pleistocene (LGM) dispersal corridor between
 # the West Himalaya (WH) and the Hengduan Mountains (HM) using
-# the LGM ensemble suitability rasters produced by Script 08c.
+# the LGM ensemble suitability rasters produced by Script 05c.
 #
 # Pipeline
 #   1. Load 3 LGM ensemble projections (CCSM4 / MIROC / MPI),
@@ -22,7 +22,7 @@
 #   6. Save figures (transect, LGM map with LCP, comparison)
 #      and CSV summaries
 #
-# Input (from Script 08c)
+# Input (from Script 05c)
 #   - 3 LGM ensemble projection rasters (.tif), one per GCM
 #   - Matching ensemble evaluation CSVs (eval_EM.csv)
 #   - Whole-region occurrence CSV (Longitude, Latitude)
