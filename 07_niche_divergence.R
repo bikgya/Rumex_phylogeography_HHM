@@ -1,12 +1,10 @@
 # ==============================================================
-# Script 10: Ecological Niche Divergence (PCA-env, ecospat)
-# Project: rumex-landscape-phylogenomics
-#
+# Ecological Niche Divergence (PCA-env, ecospat)
+# 
 # Tests whether the two phylogeographic lineages of
 # Rumex hastatus - West Himalaya (WH) and Hengduan Mountains
 # (HM) - occupy statistically distinct climatic niches.
 #
-# Pipeline (ecospat PCA-env framework, Broennimann et al. 2012)
 #   1. Split occurrences by longitude (WH vs. HM)
 #   2. Sample background environment from the study area
 #   3. Calibrate PCA on combined background + occurrence env data
