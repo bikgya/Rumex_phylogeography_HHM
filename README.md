@@ -1,91 +1,110 @@
-# Rumex_phylogeography_HHM
+# Rumex\_phylogeography\_HHM
 
 Scripts for **Jnawali et al. (2026)** *Historical Landscapes and Climate Dynamics shape Phylogeography of Rumex hastatus in the Himalaya-Hengduan Mountains.* **Plant Diversity**, in press.
 
-This repository contains the complete analytical pipeline for a phylogeographic study of *Rumex hastatus* D. Don (Polygonaceae) across the Himalaya–Hengduan Mountains (HHM). The pipeline integrates population genomics, landscape genetics, species distribution modelling, and ecological niche analyses to understand how Pleistocene climate dynamics and topographic heterogeneity shaped the genetic and distributional patterns of this montane species.
+!\[License](https://img.shields.io/badge/License-MIT-yellow.svg)
+!\[Status](https://img.shields.io/badge/Status-In\_Press-blue.svg)
+!\[Plant Diversity](https://img.shields.io/badge/Journal-Plant\_Diversity-green.svg)
 
-## 1. SNP_calling
+!\[Workflow](docs/workflow.svg)
 
-(1) `01a_bam_generation.sh` — Script to map paired-end cleaned reads to the reference genome using BWA-MEM, and sort/index alignments with SAMtools, producing one BAM file per sample.
+!\[Study area](docs/HHM\_studyarea.svg)
 
-(2) `01b_angsd_snp_calling.sh` — Script to call nuclear SNPs across all samples using ANGSD with the GATK genotype likelihood model (`-GL 2`), outputting MAF estimates, posterior genotypes, and PLINK-format files.
+## Overview
 
-(3) `envs_angsd_setup.md` — Conda environment setup instructions for ANGSD v0.935, BWA, and SAMtools.
+This repository contains the complete analytical pipeline for a phylogeographic study of *Rumex hastatus* D. Don (Polygonaceae) across the Himalaya–Hengduan Mountains (HHM). The pipeline integrates **shallow whole-genome sequencing (sWGS)** data with **species distribution modelling** and **ecological niche analyses** to understand how Pleistocene climate dynamics and topographic heterogeneity shaped the genetic structure and distribution of this widespread montane species.
 
-(4) `01_snp_calling_README.md` — Folder-level documentation describing the SNP calling pipeline.
+### Genomic component (sWGS)
 
-## 2. Coding_noncoding
+Population-level shallow whole-genome sequencing data (\~2–5× coverage) was generated for 162 *Rumex hastatus* individuals from 27 populations spanning the HHM. Because read depth at any single site is low under sWGS, hard-called genotypes are unreliable for many sites; we therefore work with **genotype likelihoods** throughout most of the genomic pipeline. Specifically, nuclear SNPs were identified using **ANGSD v0.935**, which estimates genotype likelihoods under the **GATK model (`-GL 2`)** designed to accommodate low-coverage data. Genotype likelihoods feed directly into the diversity, F<sub>ST</sub>, and SFS analyses (Steps 1–3) without requiring confident per-site calls. For the genotype-environment association analyses (Step 4), high-confidence hard genotypes were called separately using a strict posterior cutoff (0.95) on a filtered subset of individuals.
 
-(1) `02_noncoding_snp_extraction.sh` — Script to filter the SNP set from Step 1 into a non-coding subset using the reference GFF annotation and `bedtools intersect`. Non-coding SNPs are used in downstream neutral analyses where the influence of selection should be minimised.
+### Spatial component
 
-## 3. Genetic_diversity
+The species distribution modelling, dispersal corridor analysis, and ecological niche divergence test (Steps 5–7) use occurrence records and WorldClim climate layers rather than the genomic data — these analyses complement the population genetics by reconstructing past, present, and future habitat availability across the HHM.
 
-(1) `03_genetic_diversity_fst.sh` — Script to compute per-population diversity statistics (Watterson's θ, nucleotide diversity π, Tajima's D) and pairwise F<sub>ST</sub> across all population pairs using ANGSD (`realSFS`, `thetaStat`). Includes parallel F<sub>ST</sub> computation and a symmetric F<sub>ST</sub> matrix.
+\---
 
-## 4. GEA (Genotype-Environment Association)
+## 1\. SNP\_calling — `01\_sWGS\_SNPcalling/`
 
-(1) `04a_angsd_hard_genotyping.sh` — Script to call hard genotypes (0/1/2) from filtered BAM files using ANGSD with a 0.95 posterior cutoff, producing the input required by RDA and LFMM2.
+(1) `01a\_bam\_generation.sh` — Maps paired-end cleaned reads to the reference genome using BWA-MEM, sorts and indexes with SAMtools, producing one BAM file per sample.
 
-(2) `04b_gea_preprocessing.R` — Script to load ANGSD hard genotypes, apply post-calling QC filters (missingness ≤ 20%, MAF ≥ 0.05), extract current and future bioclim values at sample locations, impute missing genotypes via sNMF, and perform LD pruning within scaffolds (r² < 0.5).
+(2) `01b\_angsd\_snp\_calling.sh` — Calls nuclear SNPs across all samples using **ANGSD with the GATK genotype likelihood model (`-GL 2`)** to accommodate low coverage. Outputs MAF estimates, posterior genotypes, and PLINK-format files.
 
-(3) `04c_rda_lfmm2_intersection.R` — Script to identify adaptive SNPs using two complementary methods: Redundancy Analysis (RDA) with ±3 SD outliers on constrained axes, and Latent Factor Mixed Model (LFMM2) with genomic-control-corrected p-values. The intersection of both methods defines the consensus adaptive SNP set.
+(3) `envs\_angsd\_setup.md` — Conda environment setup instructions for ANGSD v0.935, BWA, and SAMtools.
 
-## 5. Ensemble_SDM
+(4) `01\_snp\_calling\_README.md` — Folder-level documentation describing the SNP calling pipeline.
 
-(1) `05a_occurrence_thinning_alphahull.R` — Script to clean and spatially thin occurrence records (`spThin`, 10 km), then delineate an alpha-hull study area (`rangeBuilder::getDynamicAlphaHull`) used as background for SDM training.
+## 2\. Coding\_noncoding — `02\_sWGS\_noncoding/`
 
-(2) `05b_env_preparation_vif.R` — Script to crop/mask environmental rasters to the study area, run Variance Inflation Factor (VIF, threshold = 10) selection on Current climate, and apply the selected variable subset consistently to Future and LGM scenarios.
+(1) `02\_noncoding\_snp\_extraction.sh` — Filters the SNP set from Step 1 into a non-coding subset using the reference GFF annotation and `bedtools intersect`. Non-coding SNPs are preferred for neutral analyses where the influence of selection should be minimised.
 
-(3) `05c_biomod2_ensemble.R` — Script to build ensemble species distribution models using `biomod2` across Current, LGM (CCSM4, MIROC, MPI), and Future (CCSM4, MIROC, MPI) scenarios with 10 algorithms (GLM, GBM, RF, GAM, CTA, ANN, SRE, FDA, MARS, MAXENT), block cross-validation, and ROC/TSS-filtered ensembling.
+## 3\. Genetic\_diversity — `03\_sWGS\_geneticdiversity/`
 
-(4) `05d_suitability_visualization.R` — Script to generate publication-quality habitat suitability maps with three suitability categories (Low / Medium / High) overlaid on a regional basemap with occurrence points.
+(1) `03\_genetic\_diversity\_fst.sh` — Computes per-population diversity statistics (Watterson's θ, nucleotide diversity π, Tajima's D) and pairwise F<sub>ST</sub> using ANGSD (`realSFS`, `thetaStat`). Includes parallel F<sub>ST</sub> computation and a symmetric F<sub>ST</sub> matrix output.
 
-(5) `05e_range_size_change.R` — Script to quantify pixel-wise habitat change between the Current ensemble projection and each Past/Future scenario using `biomod2::BIOMOD_RangeSize` (gain / loss / stable / never-suitable codes).
+## 4\. GEA — `04\_sWGS\_GEA/`
 
-(6) `05_samplecsv.csv` — Sample occurrence file used for SDM input (cleaned and thinned).
+(1) `04a\_angsd\_hard\_genotyping.sh` — Calls hard genotypes (0/1/2) from filtered BAM files using ANGSD with a 0.95 posterior cutoff — required for RDA and LFMM2.
 
-## 6. Corridor_analysis
+(2) `04b\_gea\_preprocessing.R` — Loads ANGSD hard genotypes, applies QC filters (missingness ≤ 20%, MAF ≥ 0.05), extracts bioclim values at sample locations, imputes missing genotypes via sNMF, and LD-prunes within scaffolds (r² < 0.5).
 
-(1) `06_dispersal_corridor.R` — Script to test for a Late Pleistocene dispersal corridor between West Himalaya (WH) and Hengduan Mountains (HM) using waypoint-guided least-cost path (`gdistance`) analysis on the LGM ensemble suitability surface. Outputs include the LCP transect, suitability along the path, and habitat-zone classification (corridor / marginal / barrier).
+(3) `04c\_rda\_lfmm2\_intersection.R` — Identifies adaptive SNPs using two complementary methods: **Redundancy Analysis (RDA)** with ±3 SD outliers on constrained axes, and **Latent Factor Mixed Model (LFMM2)** with genomic-control-corrected p-values. The intersection of both methods defines the consensus adaptive SNP set.
 
-## 7. Niche_divergence
+## 5\. Ensemble\_SDM — `05\_eSDM/`
 
-(1) `07_niche_divergence.R` — Script to test whether WH and HM lineages occupy statistically distinct ecological niches using the PCA-env framework (`ecospat`). Computes Schoener's D, Hellinger's I, and runs niche equivalency and similarity tests (both directions) with permutation.
+(1) `05a\_occurrence\_thinning\_alphahull.R` — Cleans and spatially thins occurrence records (`spThin`, 10 km), delineates an alpha-hull study area used as background for SDM training.
+
+(2) `05b\_env\_preparation\_vif.R` — Crops/masks environmental rasters to the study area, runs Variance Inflation Factor (VIF, threshold = 10) selection on Current climate, and applies the selected variable subset consistently to Future and LGM scenarios.
+
+(3) `05c\_biomod2\_ensemble.R` — Builds ensemble species distribution models using `biomod2` across Current, LGM (CCSM4, MIROC, MPI), and Future (CCSM4, MIROC, MPI) scenarios with 10 algorithms, block cross-validation, and ROC/TSS-filtered ensembling.
+
+(4) `05d\_suitability\_visualization.R` — Generates publication-quality habitat suitability maps with three suitability categories (Low / Medium / High) overlaid on a regional basemap.
+
+(5) `05e\_range\_size\_change.R` — Quantifies pixel-wise habitat change between the Current ensemble projection and each Past/Future scenario using `biomod2::BIOMOD\_RangeSize`.
+
+(6) `05\_samplecsv` — Sample occurrence file used for SDM input (cleaned and thinned).
+
+## 6\. Corridor\_analysis — `06\_Dispersal\_corridor/`
+
+(1) `06\_dispersal\_corridor.R` — Tests for a Late Pleistocene dispersal corridor between West Himalaya (WH) and Hengduan Mountains (HM) using a waypoint-guided least-cost path (`gdistance`) on the LGM ensemble suitability surface. Outputs the LCP transect, suitability along the path, and habitat-zone classification (corridor / marginal / barrier).
+
+## 7\. Niche\_divergence — `07\_Niche\_divergence/`
+
+(1) `07\_niche\_divergence.R` — Tests whether WH and HM lineages occupy statistically distinct ecological niches using the PCA-env framework (`ecospat`). Computes Schoener's D, Hellinger's I, and runs niche equivalency and similarity tests with permutation.
+
+\---
 
 ## Data sources
 
-External datasets required to reproduce the pipeline (not redistributed in this repository):
+External datasets required to reproduce the pipeline (not redistributed here):
 
-- **Bioclimatic variables (Current).** WorldClim v2.1, 19 bioclim variables at 2.5 arc-minute resolution. https://worldclim.org/data/worldclim21.html
-- **Bioclimatic variables (LGM).** WorldClim v1.4 paleoclimate downscaling for the Last Glacial Maximum (~22 kya), GCMs: **CCSM4, MIROC-ESM, MPI-ESM-P**, 2.5 arc-minute resolution. https://www.worldclim.org/data/v1.4/paleo1.4.html
-- **Bioclimatic variables (Future, 2070).** WorldClim CMIP5 downscaling under RCP scenarios, GCMs: **CCSM4, MIROC5, MPI-ESM-LR**, 2.5 arc-minute resolution. https://www.worldclim.org/data/cmip5_2.5m.html
-- **Occurrence data.** Field collections and herbarium records (deposited at the Kunming Institute of Botany), supplemented by GBIF queries for *Rumex hastatus*. https://www.gbif.org
+* **Bioclimatic variables (Current).** WorldClim v2.1, 19 bioclim variables at 2.5 arc-minute resolution. https://worldclim.org/data/worldclim21.html
+* **Bioclimatic variables (LGM).** WorldClim v1.4 paleoclimate downscaling for the Last Glacial Maximum (\~22 kya), GCMs: **CCSM4, MIROC-ESM, MPI-ESM-P**, 2.5 arc-minute resolution. https://www.worldclim.org/data/v1.4/paleo1.4.html
+* **Bioclimatic variables (Future, 2070).** WorldClim CMIP5 downscaling, GCMs: **CCSM4, MIROC5, MPI-ESM-LR**, 2.5 arc-minute resolution. https://www.worldclim.org/data/cmip5\_2.5m.html
+* **Occurrence data.** Field collections and herbarium records (deposited at the Kunming Institute of Botany, KIB), supplemented by GBIF queries for *Rumex hastatus*. https://www.gbif.org
 
 ## Software and dependencies
 
-Core tools used:
-
-| Tool | Version | Purpose |
-|------|---------|---------|
-| ANGSD | 0.935 | SNP calling, diversity, F<sub>ST</sub>, hard genotypes |
-| BWA-MEM | 0.7.17 | Read mapping |
-| SAMtools | 1.17 | BAM sorting and indexing |
-| PLINK | 1.9 | File-format conversion |
-| `biomod2` (R) | 4.x | Ensemble SDM |
-| `ecospat` (R) | 4.x | Niche divergence (PCA-env) |
-| `gdistance` (R) | 1.x | Least-cost path |
-| LEA, vegan, lfmm (R) | latest | GEA (LFMM2 + RDA) |
+|Tool|Version|Purpose|
+|-|-|-|
+|ANGSD|0.935|SNP calling, diversity, F<sub>ST</sub>, hard genotypes (sWGS)|
+|BWA-MEM|0.7.17|Read mapping|
+|SAMtools|1.17|BAM sorting and indexing|
+|PLINK|1.9|File-format conversion|
+|`biomod2` (R)|4.x|Ensemble SDM|
+|`ecospat` (R)|4.x|Niche divergence (PCA-env)|
+|`gdistance` (R)|1.x|Least-cost path|
+|`LEA`, `vegan`, `lfmm` (R)|latest|GEA (LFMM2 + RDA)|
 
 ## Citation
 
 If you use this code or data, please cite:
 
-> Jnawali B., Sun H., Luo D. (2026). Historical Landscapes and Climate Dynamics shape Phylogeography of *Rumex hastatus* in the Himalaya–Hengduan Mountains. *Plant Diversity*, in press.
+> Jnawali B., Sun H., Luo D. (2026). Historical Landscapes and Climate Dynamics shape Phylogeography of \*Rumex hastatus\* in the Himalaya–Hengduan Mountains. \*Plant Diversity\*, in press.
 
 A `CITATION.cff` file is provided for automatic citation parsing by GitHub and Zenodo.
 
 ## License
 
-The code in this repository is released under the [MIT License](LICENSE).
+The code in this repository is released under the [MIT License](LICENSE). External datasets retain their original licenses — see provider websites.
 
-External datasets retain their original licenses — see provider websites.

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+
+  <defs>
+    <linearGradient id="elevGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#FFFEF7"/>
+      <stop offset="20%"  stop-color="#F0E8C4"/>
+      <stop offset="45%"  stop-color="#C9B27A"/>
+      <stop offset="70%"  stop-color="#9A8856"/>
+      <stop offset="100%" stop-color="#5C4F33"/>
+    </linearGradient>
+    <linearGradient id="plateauGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8DCB9"/>
+      <stop offset="100%" stop-color="#C9B989"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background (low-elevation area: plains around the mountains) -->
+  <rect width="1000" height="560" fill="#F5EFE0"/>
+
+  <!-- Title -->
+  <text x="500" y="36" text-anchor="middle" font-size="20" font-weight="600" fill="#3E2C18">
+    Study area: Himalaya–Hengduan Mountains
+  </text>
+  <text x="500" y="56" text-anchor="middle" font-size="12" font-style="italic" fill="#7A6650">
+    Rumex hastatus phylogeography | West Himalaya to Hengduan transect
+  </text>
+
+  <!-- ============== Tibetan Plateau (large central tan area) ============== -->
+  <path d="M 280 165 Q 340 145, 430 150 Q 540 152, 640 158 Q 720 162, 770 175 Q 810 195, 805 250 Q 800 295, 750 305 Q 660 312, 560 308 Q 460 305, 360 295 Q 290 285, 270 240 Q 265 200, 280 165 Z"
+        fill="url(#plateauGrad)" stroke="#8C7956" stroke-width="0.8" opacity="0.85"/>
+  <text x="525" y="232" text-anchor="middle" font-size="14" font-style="italic" font-weight="500" fill="#5C4F33">
+    Tibetan Plateau
+  </text>
+  <text x="525" y="250" text-anchor="middle" font-size="10" fill="#7A6650">
+    ~4500 m
+  </text>
+
+  <!-- ============== Himalayan Arc (south of plateau) ============== -->
+  <path d="M 180 320 Q 250 305, 340 308 Q 460 312, 580 320 Q 700 328, 790 340 Q 820 345, 805 360 Q 770 370, 700 358 Q 580 348, 460 342 Q 340 338, 250 350 Q 200 358, 180 345 Z"
+        fill="url(#elevGrad)" stroke="#5C4F33" stroke-width="0.9" opacity="0.95"/>
+
+  <!-- Simplified mountain peaks along Himalayan arc -->
+  <g fill="#8C7956" opacity="0.55">
+    <polygon points="220,320 230,300 240,320"/>
+    <polygon points="270,318 282,294 294,318"/>
+    <polygon points="330,315 343,289 356,315"/>
+    <polygon points="400,317 415,288 430,317"/>
+    <polygon points="475,320 490,290 505,320"/>
+    <polygon points="555,325 570,295 585,325"/>
+    <polygon points="635,330 650,302 665,330"/>
+    <polygon points="710,335 725,308 740,335"/>
+  </g>
+
+  <!-- ============== Hengduan Mountains (east-southeast, perpendicular ridges) ============== -->
+  <g>
+    <!-- Four parallel north-south ridges (characteristic of Hengduan) -->
+    <path d="M 780 200 Q 783 280, 795 380 Q 800 420, 810 460"
+          stroke="#6C5B3A" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.85"/>
+    <path d="M 810 195 Q 815 280, 825 380 Q 830 420, 838 460"
+          stroke="#7A6644" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.85"/>
+    <path d="M 840 195 Q 843 280, 855 385 Q 860 425, 868 465"
+          stroke="#6C5B3A" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.85"/>
+    <path d="M 870 200 Q 873 285, 880 385 Q 885 425, 892 465"
+          stroke="#7A6644" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.85"/>
+  </g>
+
+  <!-- ============== Major Rivers (blue lines) ============== -->
+  <g stroke="#3B72BF" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.85">
+    <!-- Indus (West Himalaya) -->
+    <path d="M 220 290 Q 200 330, 175 380 Q 155 430, 145 480"/>
+    <!-- Ganges/Brahmaputra (Central Himalaya) -->
+    <path d="M 400 340 Q 390 380, 380 420 Q 375 460, 365 500"/>
+    <!-- Brahmaputra east bend -->
+    <path d="M 660 335 Q 700 350, 745 380 Q 770 410, 780 450"/>
+    <!-- Yangtze (Hengduan) -->
+    <path d="M 800 220 Q 810 290, 825 370 Q 845 430, 870 490"/>
+    <!-- Mekong / Salween (Hengduan) -->
+    <path d="M 845 230 Q 855 310, 870 390 Q 890 450, 905 500"/>
+  </g>
+
+  <!-- River labels -->
+  <text x="148" y="445" font-size="9" font-style="italic" fill="#1F4E8A">Indus</text>
+  <text x="362" y="465" font-size="9" font-style="italic" fill="#1F4E8A">Ganges</text>
+  <text x="755" y="430" font-size="9" font-style="italic" fill="#1F4E8A">Brahmaputra</text>
+  <text x="870" y="450" font-size="9" font-style="italic" fill="#1F4E8A">Yangtze</text>
+  <text x="910" y="480" font-size="9" font-style="italic" fill="#1F4E8A">Mekong</text>
+
+  <!-- ============== Region labels ============== -->
+  <!-- West Himalaya box -->
+  <rect x="170" y="385" width="200" height="46" rx="6" fill="white" stroke="#5C4F33" stroke-width="1" opacity="0.95"/>
+  <text x="270" y="404" text-anchor="middle" font-size="14" font-weight="700" fill="#3E2C18">West Himalaya (WH)</text>
+  <text x="270" y="421" text-anchor="middle" font-size="10" fill="#7A6650">Kashmir – Western Nepal</text>
+
+  <!-- Hengduan Mountains box -->
+  <rect x="750" y="100" width="180" height="46" rx="6" fill="white" stroke="#5C4F33" stroke-width="1" opacity="0.95"/>
+  <text x="840" y="119" text-anchor="middle" font-size="14" font-weight="700" fill="#3E2C18">Hengduan Mts. (HM)</text>
+  <text x="840" y="136" text-anchor="middle" font-size="10" fill="#7A6650">SW China – N Myanmar</text>
+
+  <!-- ============== Sampling localities (representative red dots) ============== -->
+  <g fill="#C62828" stroke="white" stroke-width="1.2">
+    <!-- West Himalaya cluster -->
+    <circle cx="210" cy="340" r="4"/>
+    <circle cx="245" cy="335" r="4"/>
+    <circle cx="280" cy="345" r="4"/>
+    <circle cx="320" cy="338" r="4"/>
+    <circle cx="355" cy="350" r="4"/>
+    <circle cx="390" cy="345" r="4"/>
+    <!-- Central -->
+    <circle cx="455" cy="355" r="4"/>
+    <circle cx="495" cy="360" r="4"/>
+    <circle cx="540" cy="358" r="4"/>
+    <circle cx="580" cy="365" r="4"/>
+    <circle cx="615" cy="362" r="4"/>
+    <!-- Hengduan cluster -->
+    <circle cx="780" cy="305" r="4"/>
+    <circle cx="800" cy="335" r="4"/>
+    <circle cx="820" cy="365" r="4"/>
+    <circle cx="845" cy="345" r="4"/>
+    <circle cx="860" cy="385" r="4"/>
+    <circle cx="880" cy="365" r="4"/>
+    <circle cx="830" cy="400" r="4"/>
+    <circle cx="855" cy="420" r="4"/>
+  </g>
+
+  <!-- ============== Legend ============== -->
+  <g transform="translate(40, 470)">
+    <rect width="280" height="70" rx="6" fill="white" stroke="#8C7956" stroke-width="0.8" opacity="0.95"/>
+    <text x="14" y="22" font-size="11" font-weight="600" fill="#3E2C18">Legend</text>
+
+    <circle cx="22" cy="40" r="4" fill="#C62828" stroke="white" stroke-width="1.2"/>
+    <text x="36" y="44" font-size="10" fill="#3E2C18">Rumex hastatus sampling localities (n = 27 pops)</text>
+
+    <line x1="14" y1="58" x2="30" y2="58" stroke="#3B72BF" stroke-width="1.8" stroke-linecap="round"/>
+    <text x="36" y="62" font-size="10" fill="#3E2C18">Major rivers (Indus, Ganges, Yangtze, Mekong)</text>
+  </g>
+
+  <!-- North arrow -->
+  <g transform="translate(940, 100)">
+    <polygon points="0,-22 -7,8 0,2 7,8" fill="#3E2C18"/>
+    <text x="0" y="24" text-anchor="middle" font-size="10" font-weight="600" fill="#3E2C18">N</text>
+  </g>
+
+  <!-- Scale bar reference -->
+  <g transform="translate(720, 510)">
+    <line x1="0" y1="0" x2="100" y2="0" stroke="#3E2C18" stroke-width="2"/>
+    <line x1="0" y1="-4" x2="0" y2="4" stroke="#3E2C18" stroke-width="2"/>
+    <line x1="50" y1="-4" x2="50" y2="4" stroke="#3E2C18" stroke-width="2"/>
+    <line x1="100" y1="-4" x2="100" y2="4" stroke="#3E2C18" stroke-width="2"/>
+    <text x="0" y="22" text-anchor="middle" font-size="9" fill="#3E2C18">0</text>
+    <text x="50" y="22" text-anchor="middle" font-size="9" fill="#3E2C18">500</text>
+    <text x="100" y="22" text-anchor="middle" font-size="9" fill="#3E2C18">1000 km</text>
+  </g>
+</svg>

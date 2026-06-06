@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a6c7d"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="720" fill="#fafbfc"/>
+
+  <!-- Title -->
+  <text x="500" y="40" text-anchor="middle" font-size="22" font-weight="600" fill="#1a2530">
+    Rumex hastatus phylogeography pipeline
+  </text>
+  <text x="500" y="62" text-anchor="middle" font-size="13" fill="#6c7a87">
+    Himalaya–Hengduan Mountains | Plant Diversity 2026
+  </text>
+
+  <!-- Input data row -->
+  <text x="500" y="105" text-anchor="middle" font-size="12" font-weight="600" letter-spacing="1.5" fill="#6c7a87">INPUTS</text>
+
+  <g>
+    <rect x="80" y="115" width="200" height="50" rx="6" fill="#e8edf3" stroke="#b8c4d1" stroke-width="1"/>
+    <text x="180" y="138" text-anchor="middle" font-size="13" font-weight="600" fill="#2c3e50">sWGS reads (162 ind.)</text>
+    <text x="180" y="154" text-anchor="middle" font-size="11" fill="#5a6c7d">~2–5× coverage</text>
+  </g>
+
+  <g>
+    <rect x="305" y="115" width="200" height="50" rx="6" fill="#e8edf3" stroke="#b8c4d1" stroke-width="1"/>
+    <text x="405" y="138" text-anchor="middle" font-size="13" font-weight="600" fill="#2c3e50">Reference genome</text>
+    <text x="405" y="154" text-anchor="middle" font-size="11" fill="#5a6c7d">+ GFF annotation</text>
+  </g>
+
+  <g>
+    <rect x="530" y="115" width="200" height="50" rx="6" fill="#e8edf3" stroke="#b8c4d1" stroke-width="1"/>
+    <text x="630" y="138" text-anchor="middle" font-size="13" font-weight="600" fill="#2c3e50">Occurrence records</text>
+    <text x="630" y="154" text-anchor="middle" font-size="11" fill="#5a6c7d">field + GBIF</text>
+  </g>
+
+  <g>
+    <rect x="755" y="115" width="160" height="50" rx="6" fill="#e8edf3" stroke="#b8c4d1" stroke-width="1"/>
+    <text x="835" y="138" text-anchor="middle" font-size="13" font-weight="600" fill="#2c3e50">WorldClim layers</text>
+    <text x="835" y="154" text-anchor="middle" font-size="11" fill="#5a6c7d">LGM / current / future</text>
+  </g>
+
+  <!-- Two pipeline columns headers -->
+  <text x="250" y="210" text-anchor="middle" font-size="13" font-weight="600" letter-spacing="1.5" fill="#1976d2">GENOMIC PIPELINE (sWGS)</text>
+  <text x="750" y="210" text-anchor="middle" font-size="13" font-weight="600" letter-spacing="1.5" fill="#2e7d32">SPATIAL PIPELINE</text>
+
+  <!-- LEFT COLUMN: Genomic steps -->
+  <!-- Step 1 -->
+  <g>
+    <rect x="80" y="230" width="340" height="60" rx="6" fill="#e3f2fd" stroke="#1976d2" stroke-width="1.5"/>
+    <circle cx="110" cy="260" r="16" fill="#1976d2"/>
+    <text x="110" y="265" text-anchor="middle" font-size="14" font-weight="700" fill="white">01</text>
+    <text x="138" y="255" font-size="14" font-weight="600" fill="#0d47a1">SNP calling</text>
+    <text x="138" y="273" font-size="11" fill="#1565c0">ANGSD GL (-GL 2, GATK model)</text>
+  </g>
+
+  <!-- Step 2 -->
+  <g>
+    <rect x="80" y="305" width="340" height="60" rx="6" fill="#e3f2fd" stroke="#1976d2" stroke-width="1.5"/>
+    <circle cx="110" cy="335" r="16" fill="#1976d2"/>
+    <text x="110" y="340" text-anchor="middle" font-size="14" font-weight="700" fill="white">02</text>
+    <text x="138" y="330" font-size="14" font-weight="600" fill="#0d47a1">Coding / non-coding partitioning</text>
+    <text x="138" y="348" font-size="11" fill="#1565c0">GFF + bedtools intersect</text>
+  </g>
+
+  <!-- Step 3 -->
+  <g>
+    <rect x="80" y="380" width="340" height="60" rx="6" fill="#e3f2fd" stroke="#1976d2" stroke-width="1.5"/>
+    <circle cx="110" cy="410" r="16" fill="#1976d2"/>
+    <text x="110" y="415" text-anchor="middle" font-size="14" font-weight="700" fill="white">03</text>
+    <text x="138" y="405" font-size="14" font-weight="600" fill="#0d47a1">Genetic diversity &amp; F_ST</text>
+    <text x="138" y="423" font-size="11" fill="#1565c0">θ, π, Tajima's D, pairwise F_ST</text>
+  </g>
+
+  <!-- Step 4 -->
+  <g>
+    <rect x="80" y="455" width="340" height="60" rx="6" fill="#e3f2fd" stroke="#1976d2" stroke-width="1.5"/>
+    <circle cx="110" cy="485" r="16" fill="#1976d2"/>
+    <text x="110" y="490" text-anchor="middle" font-size="14" font-weight="700" fill="white">04</text>
+    <text x="138" y="480" font-size="14" font-weight="600" fill="#0d47a1">GEA: adaptive SNPs</text>
+    <text x="138" y="498" font-size="11" fill="#1565c0">RDA + LFMM2 (consensus)</text>
+  </g>
+
+  <!-- Vertical arrows between left steps -->
+  <line x1="250" y1="290" x2="250" y2="305" stroke="#5a6c7d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="250" y1="365" x2="250" y2="380" stroke="#5a6c7d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="250" y1="440" x2="250" y2="455" stroke="#5a6c7d" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- RIGHT COLUMN: Spatial steps -->
+  <!-- Step 5 -->
+  <g>
+    <rect x="580" y="230" width="340" height="60" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
+    <circle cx="610" cy="260" r="16" fill="#2e7d32"/>
+    <text x="610" y="265" text-anchor="middle" font-size="14" font-weight="700" fill="white">05</text>
+    <text x="638" y="255" font-size="14" font-weight="600" fill="#1b5e20">Ensemble SDM (biomod2)</text>
+    <text x="638" y="273" font-size="11" fill="#2e7d32">10 algorithms, ROC/TSS filter</text>
+  </g>
+
+  <!-- Step 6 -->
+  <g>
+    <rect x="580" y="305" width="340" height="60" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
+    <circle cx="610" cy="335" r="16" fill="#2e7d32"/>
+    <text x="610" y="340" text-anchor="middle" font-size="14" font-weight="700" fill="white">06</text>
+    <text x="638" y="330" font-size="14" font-weight="600" fill="#1b5e20">Dispersal corridor (LCP)</text>
+    <text x="638" y="348" font-size="11" fill="#2e7d32">gdistance, WH ↔ HM transect</text>
+  </g>
+
+  <!-- Step 7 -->
+  <g>
+    <rect x="580" y="380" width="340" height="60" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
+    <circle cx="610" cy="410" r="16" fill="#2e7d32"/>
+    <text x="610" y="415" text-anchor="middle" font-size="14" font-weight="700" fill="white">07</text>
+    <text x="638" y="405" font-size="14" font-weight="600" fill="#1b5e20">Ecological niche divergence</text>
+    <text x="638" y="423" font-size="11" fill="#2e7d32">ecospat PCA-env, Schoener's D</text>
+  </g>
+
+  <!-- Vertical arrows between right steps -->
+  <line x1="750" y1="290" x2="750" y2="305" stroke="#5a6c7d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="750" y1="365" x2="750" y2="380" stroke="#5a6c7d" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Convergence arrows to integrative box -->
+  <path d="M 250 515 L 250 580 L 400 580 L 400 610" stroke="#5a6c7d" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 750 440 L 750 580 L 600 580 L 600 610" stroke="#5a6c7d" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Integrative bottom box -->
+  <g>
+    <rect x="200" y="615" width="600" height="65" rx="8" fill="#fff8e1" stroke="#f9a825" stroke-width="2"/>
+    <text x="500" y="640" text-anchor="middle" font-size="14" font-weight="600" fill="#5d4037">
+      Integrative interpretation
+    </text>
+    <text x="500" y="660" text-anchor="middle" font-size="11" fill="#795548">
+      Pleistocene climate dynamics × topographic heterogeneity →
+    </text>
+    <text x="500" y="673" text-anchor="middle" font-size="11" fill="#795548">
+      genetic structure + range dynamics of Rumex hastatus
+    </text>
+  </g>
+</svg>
